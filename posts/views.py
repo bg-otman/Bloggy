@@ -23,7 +23,7 @@ def new_post(request):
 			post = form.save(commit=False) # used to return an instance of the model, but still not saved to database
 			post.author = request.user
 			post.save()
-			return redirect("posts:list")
+			return redirect("posts:my_posts")
 	else:
 		form = forms.CreatePost()
 	return render(request, 'posts/new_post.html', { 'form' : form })

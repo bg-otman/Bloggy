@@ -7,7 +7,7 @@ class Post(models.Model):
 	body = models.TextField()
 	slug = models.SlugField(primary_key=True)
 	dateTime = models.DateTimeField(auto_now_add=True)
-	Banner = models.ImageField(default='toji.png', blank=True)
+	Banner = models.ImageField(blank=True)
 	author = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
 	def __str__(self):
