@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Posts Lists
+{% endblock title %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <header class="mb-6">
+    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 dark:text-white">
+      Explore various Articles
+    </h1>
+    <p class="mt-2 text-sm sm:text-base text-gray-600 dark:text-gray-300">
+      Browse the latest articles.
+    </p>
+  </header>
+  {% if posts %}
+    <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" role="list">
+      {% for post in posts %}
+        <li class="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition">
+          <a href="{% url 'posts:page' slug=post.slug %}" class="block p-5 h-full">
+            <h2 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2">
+              {{ post.title }}
+            </h2>
+
+            <p class="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
+              {{ post.body|default_if_none:""|truncatewords:28 }}
+            </p>
+
+            <div class="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400 mt-auto">
+              <div>
+                By <span class="font-medium text-gray-700 dark:text-gray-200">{{ post.author.username }}</span>
+              </div>
+              {% if post.created %}
+                <time datetime="{{ post.created|date:'c' }}">{{ post.created|date:"M j, Y" }}</time>
+              {% endif %}
+            </div>
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="rounded-lg bg-gray-50 dark:bg-gray-800 p-6 text-center">
+      <p class="text-gray-700 dark:text-gray-200">No articles found.
+		 <a href="{% url 'posts:new_post' %}" class="text-cyan-700 hover:underline">Create the first one</a>.</p>
+    </div>
+  {% endif %}
+</div>
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block title %}
+	Update Post
+{% endblock title %}
+
+{% block content %}
+	<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+		<section class="bg-white dark:bg-gray-900 rounded-lg shadow-sm ring-1 ring-gray-100 dark:ring-gray-800 p-6">
+			<header class="mb-6">
+			<h1 class="text-2xl sm:text-3xl font-extrabold text-gray-900 dark:text-white">Create a new Post</h1>
+			<p class="mt-2 text-sm text-gray-600 dark:text-gray-300">Write something great — add a title, a URL slug, an optional banner and publish.</p>
+			</header>
+			
+			<form action="{% url 'posts:update_post' slug=post.slug %}"
+				method="post"
+				enctype="multipart/form-data"
+				class="new-post-form w-full space-y-6
+						[&_label]:block [&_label]:text-sm [&_label]:font-medium [&_label]:text-gray-700 dark:[&_label]:text-gray-200
+						[&_input]:w-full [&_input]:px-3 [&_input]:py-2 [&_input]:rounded-md [&_input]:border [&_input]:border-gray-300 dark:[&_input]:border-gray-700
+						[&_input]:bg-white dark:[&_input]:bg-gray-800 [&_input]:text-gray-900 dark:[&_input]:text-white
+						[&_textarea]:w-full [&_textarea]:min-h-[36rem] [&_textarea]:p-4 [&_textarea]:rounded-md [&_textarea]:border [&_textarea]:border-gray-300 dark:[&_textarea]:border-gray-700
+						[&_textarea]:bg-white dark:[&_textarea]:bg-gray-800 [&_textarea]:text-gray-900 dark:[&_textarea]:text-white
+						[&_input[type='file']]:pt-2 [&_input[type='file']]:text-sm [&_input[type='file']]:text-gray-700 dark:[&_input[type='file']]:text-gray-200"
+			>
+			{% csrf_token %}
+
+			<div>
+				<label for="title">Title</label>
+				{{ form.title }}
+			</div>
+
+			<div>
+				{{ form.body }}
+				<p class="mt-2 text-xs text-gray-500 dark:text-gray-400">Pro tip: use headings and paragraphs to structure your article.</p>
+			</div>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+				<div>
+				<label for="slug">URL slug</label>
+				{{ form.slug }}
+				<p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Optional: a readable URL fragment (letters, numbers, hyphens).</p>
+				</div>
+
+				<div>
+					<label for="banner">Banner</label>
+				{{ form.Banner }}
+				<p class="mt-1 text-xs text-gray-500 dark:text-gray-400">Upload a banner image.</p>
+				</div>
+			</div>
+
+
+			<div class="pt-3">
+				<button type="submit"
+						class="btn btn-form inline-flex items-center justify-center px-5 py-2 rounded-md bg-cyan-700 
+						hover:bg-cyan-800 text-white font-semibold shadow-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 
+						focus:ring-offset-2">
+				Publish Post
+				</button>
+			</div>
+			</form>
+		</section>
+	</div>
+{% endblock content %}
