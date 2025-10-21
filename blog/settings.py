@@ -11,8 +11,6 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
-import os
-import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,17 +20,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-xkn=$%v$qnuq!j4so_z@-0mn%nz6nri1us1c^+y)ac2%7bf_@6")
+SECRET_KEY = 'django-insecure-xkn=$%v$qnuq!j4so_z@-0mn%nz6nri1us1c^+y)ac2%7bf_@6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", "False") == "True"
+DEBUG = False
 
-# Allow setting hosts via environment variable (comma separated) or fall back to defaults
-_env_allowed = os.environ.get("ALLOWED_HOSTS", "")
-if _env_allowed:
-    ALLOWED_HOSTS = [h.strip() for h in _env_allowed.split(",") if h.strip()]
-else:
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "*.vercel.app"]
 
 # Application definition
 
@@ -80,22 +73,12 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 
 # Database
-# Use DATABASE_URL when provided (production). Fall back to sqlite for local dev.
-DATABASE_URL = os.environ.get("DATABASE_URL")
-
-if DATABASE_URL:
-    # parse database URL (e.g. postgres://user:pass@host:port/dbname)
-    DATABASES = {
-        "default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
