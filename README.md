@@ -69,7 +69,7 @@ You can also use the helper script:
 bash build.sh
 ```
 
-## CRUD Endpoints (high-level)
+## CRUD Endpoints
 - List posts: `/posts/`
 - Create post: `/posts/new_post/`
 - View a post: `/posts/<slug>/`
