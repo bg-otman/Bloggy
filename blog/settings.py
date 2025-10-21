@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-xkn=$%v$qnuq!j
 DEBUG = False if os.environ.get("DJANGO_DEBUG") == "False" else True
 
 # Allow setting hosts via environment variable (comma separated) or fall back to defaults
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com", "https://*.onrender.com"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "obouizi.pythonanywhere.com"]
 
 # Application definition
 
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'blog.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
