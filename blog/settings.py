@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-xkn=$%v$qnuq!j
 DEBUG = False if os.environ.get("DJANGO_DEBUG") == "False" else True
 
 # Allow setting hosts via environment variable (comma separated) or fall back to defaults
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".onrender.com", "https://*.onrender.com"]
 
 # Application definition
 
