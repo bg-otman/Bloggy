@@ -31,9 +31,7 @@
               <div>
                 By <span class="font-medium text-gray-700 dark:text-gray-200">{{ post.author.username }}</span>
               </div>
-              {% if post.created %}
-                <time datetime="{{ post.created|date:'c' }}">{{ post.created|date:"M j, Y" }}</time>
-              {% endif %}
+                <time datetime="{{ post.dateTime|date:'c' }}">{{ post.dateTime|date:"M j, Y" }}</time>
             </div>
           </a>
         </li>
