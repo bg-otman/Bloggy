@@ -16,13 +16,30 @@
 <body class="dark:bg-gray-900 bg-white min-h-screen">
 	<header class="bg-gray-50 border-b-1 dark:bg-gray-900 dark:text-white flex justify-between items-center h-25 p-5 mb-1 relative">
 		<div class="flex items-center gap-4">
-			<img src="{% static 'imgs/bloggy.png' %}" alt="logo" title="bloggy" class="block" />
+			<a href="{% url 'home' %}">
+				<img src="{% static 'imgs/bloggy.png' %}" alt="logo" title="bloggy" class="block" />
+			</a>
 			<nav id="desktop-nav" class="hidden lg:flex h-full lg:text-base cntr md:gap-2 lg:gap-7">
-			<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'home' %}">Home</a> |
-			<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'posts:list' %}">Posts</a> |
-			<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'posts:my_posts' %}">My posts</a> |
-			<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'posts:new_post' %}">New Post</a>
+				<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'home' %}">Home</a> |
+				<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'posts:list' %}">Posts</a> |
+				<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'posts:my_posts' %}">My posts</a> |
+				<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'posts:new_post' %}">New Post</a>
 			</nav>
+		</div>
+		<div class="cntr gap-2">
+			{% if user.is_authenticated %}
+				<p class="name">
+					<strong>👋 {{ user.username }}</strong>
+				</p>
+				<form role="button" class="hidden min-[457px]:block" action="{% url 'users:logout' %}" method="post">
+					{% csrf_token %}
+					<button class="btn bg-red-400">Logout</button>
+				</form>
+			{% else %}
+				<a class="hidden md:block link btn bg-cyan-700 hover:bg-cyan-800" href="{% url 'users:register' %}">Sign up</a>
+				<a class="hidden md:block link btn bg-cyan-700 hover:bg-cyan-800" href="{% url 'users:login' %}">Login</a>
+			{% endif %}
+			<button title="toggle theme" class="w-15 hidden md:block toggle-theme btn bg-cyan-700 hover:bg-cyan-800">🌗</button>
 			<!-- Mobile toggle button (visible below lg) -->
 			<button id="nav-toggle" class="lg:hidden p-2 rounded-md text-black
 			 dark:text-white bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800"
@@ -34,24 +51,9 @@
 				<span class="sr-only">Open main menu</span>
 			</button>
 		</div>
-		<div class="cntr gap-2">
-			{% if user.is_authenticated %}
-				<label for="username" class="name">
-					<strong>👋 {{ user.username }}</strong>
-				</label>
-				<form role="button" class="hidden min-[457px]:block" action="{% url 'users:logout' %}" method="post">
-					{% csrf_token %}
-					<button class="btn bg-red-400">Logout</button>
-				</form>
-			{% else %}
-				<a class="hidden md:block link btn bg-cyan-700 hover:bg-cyan-800" href="{% url 'users:register' %}">Sign up</a>
-				<a class="hidden md:block link btn bg-cyan-700 hover:bg-cyan-800" href="{% url 'users:login' %}">Login</a>
-			{% endif %}
-			<button title="toggle theme" class=" hidden md:block toggle-theme btn bg-cyan-700 hover:bg-cyan-800">🌗</button>
-		</div>
 		<!-- Mobile dropdown nav -->
 		<div id="mobile-nav" class="lg:hidden hidden absolute left-0 right-0 top-[-5px] mt-1 bg-gray-50 dark:bg-gray-900 border-t shadow-md z-50">
-			<nav class="flex flex-col p-3 gap-2">
+			<nav class="flex flex-col p-3 gap-2 [&>a]:border-b [&>a]:active:bg-cyan-700 [&>a]:active:text-white">
 				<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'home' %}">Home</a>
 				<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'posts:list' %}">Posts</a>
 				<a class="text-black dark:text-white hover:text-cyan-400 link" href="{% url 'posts:my_posts' %}">My posts</a>

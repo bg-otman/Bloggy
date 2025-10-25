@@ -49,7 +49,7 @@
     {% if recent_posts %}
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {% for post in recent_posts %}
-          <article class="bg-white dark:bg-gray-800 border hover:border-2 hover:border-blue-600 rounded-lg p-4 hover:shadow-md transition-shadow">
+          <article class="bg-white dark:bg-gray-800 border hover:border-cyan-600 rounded-lg p-4 hover:shadow-md transition-shadow">
             <a href="{% url 'posts:page' post.slug %}" class="block">
               <h3 class="text-lg sm:text-xl font-semibold text-gray-900 dark:text-white mb-1">{{ post.title }}</h3>
               <p class="text-sm text-gray-600 dark:text-gray-300 mb-3">
